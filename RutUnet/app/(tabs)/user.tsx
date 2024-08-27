@@ -1,6 +1,11 @@
 import React from 'react';
-import { Image, StyleSheet, View, Button, Text, StatusBar, TouchableOpacity } from 'react-native';
+import { Image, StyleSheet, View, Button, Text, StatusBar, Pressable } from 'react-native';
 import { useRouter } from 'expo-router';
+import bus from "@/assets/icons/bus.png"
+import gps from "@/assets/icons/gps_pin.png"
+import clock from "@/assets/icons/clock.png"
+import {UserDisplay, UserDisplayWeek} from '@/components/Components/UserDisplay';
+
 
 export default function UserInfo() {
   const router = useRouter();
@@ -8,12 +13,12 @@ export default function UserInfo() {
     
     <View style={styles.container_bg}>
       <View style={styles.container_goBack}>
-      <TouchableOpacity  onPress={() => router.back()}>
+      <Pressable  onPress={() => router.push('./notification')}>
         <Image 
             source={require('../../assets/icons/arrow_left.png')} // Adjust the path to your logo
             style={styles.arrow}
           />
-      </TouchableOpacity>
+      </Pressable>
        </View>
       <View style={styles.container_inner}>
         <View style={styles.userAccountInfo}>
@@ -28,22 +33,11 @@ export default function UserInfo() {
           </Text>
           
           <View style={styles.user_informationFullContainer}>
-            <View style={styles.user_informationContainer}>
-              <Text style={[styles.user_Text,styles.bold, styles.user_informationDisplayUpperText]}>Ruta: </Text>
-              <View style={styles.user_informationDisplay}>
-                <View style={styles.user_informationDisplayLeftPart}>
-                  <Image 
-                      source={require('../../assets/icons/bus.png')}
-                      style={styles.infoImage}
-                    />
-                  <Text style={[styles.user_Text, styles.user_informationDisplayText]}>19 de Abril</Text>
-                </View>
-                <Image 
-                      source={require('../../assets/icons/edit.png')}
-                      style={styles.infoImage}/>
-                      
-              </View>
-            </View>
+            <UserDisplay icon={bus} displayName="Ruta" displayText="19 de Abril" editInfo={() => console.log("hi")} />
+            <UserDisplay icon={gps} displayName="Tu Parada" displayText="Liceo Roman Valecillos" editInfo={() =>console.log("hello")} />
+            <UserDisplay icon={clock} displayName="Notificar cuando falten" displayText="5 min" editInfo={() =>console.log("goodbye")} />
+            <UserDisplayWeek displayName="Dias de uso en la mañana" displayText={["Lun", "Mar", "Mie", "Jue", "Vie"]} dayBool={[false, false, false, false, true]} editInfo={() =>console.log("goodbye")} />
+            <UserDisplayWeek displayName="Dias de uso en la tarde" displayText={["Lun", "Mar", "Mie", "Jue", "Vie"]} dayBool={[true, false, false, true, true]} editInfo={() =>console.log("goodbye")} />
           </View>
           
         
@@ -124,38 +118,8 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     justifyContent: 'center',
     alignItems: 'center',
-    borderRadius: 24,
+    gap: 12,
   
-  },
-  user_informationContainer: {
-    width: '100%',
-    flexDirection: 'column',
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  user_informationDisplayUpperText: {
-    marginLeft: 10,
-    alignSelf: 'flex-start',
-  },
-  user_informationDisplay: {
-    flexDirection: 'row',
-    width: '100%',
-    backgroundColor: '#CBDDF6',
-    paddingVertical: 10,
-    paddingHorizontal: 16,
-    borderRadius: 30,
-    justifyContent: 'space-between',
-    alignItems: 'center',
-  },
-  user_informationDisplayLeftPart: {
-    flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center',
-    gap: 5,
-  },
-  user_informationDisplayText: {
-    fontWeight: '600',
-    fontSize: 14,
   },
   
  

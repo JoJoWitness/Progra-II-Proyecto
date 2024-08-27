@@ -1,5 +1,5 @@
 import React from 'react';
-import { Image, StyleSheet, View, Button, Text, StatusBar, TouchableOpacity } from 'react-native';
+import { Image, StyleSheet, View, Button, Text, StatusBar, Pressable } from 'react-native';
 import { useRouter } from 'expo-router';
 
 export default function HomeScreen() {
@@ -16,14 +16,14 @@ export default function HomeScreen() {
       </View>
       <Text style={styles.title}>RUTUNET</Text>
       <View style={styles.buttonContainer}>
-        <TouchableOpacity style={styles.buttonLog} onPress={() => router.push('./(tabs)/user')}>
+        <Pressable style={styles.buttonLog} onPress={() => router.push('./(tabs)/user')}>
             <Text style={styles.buttonTextLog}>Ingresar</Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.buttonSing} onPress={() => router.push('./(tabs)/explore')}>
+          </Pressable>
+          <Pressable style={styles.buttonSing} onPress={() => router.push('./(tabs)/explore')}>
             <Text style={styles.buttonTextSing }>
               <Text>Registrarse</Text>
             </Text>
-          </TouchableOpacity>
+          </Pressable>
       </View>
     </View>
   );
