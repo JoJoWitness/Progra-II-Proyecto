@@ -16,7 +16,7 @@ export default function HomeScreen() {
       </View>
       <Text style={styles.title}>RUTUNET</Text>
       <View style={styles.buttonContainer}>
-        <Pressable style={styles.buttonLog} onPress={() => router.push('./(tabs)/user')}>
+        <Pressable style={styles.buttonLog} onPress={() => router.push('./(tabs)/mainScreen')}>
             <Text style={styles.buttonTextLog}>Ingresar</Text>
           </Pressable>
           <Pressable style={styles.buttonSing} onPress={() => router.push('./(tabs)/explore')}>

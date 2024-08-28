@@ -28,6 +28,16 @@ export default function TabLayout() {
         }}
       />
       <Tabs.Screen
+        name="mainScreen"
+        options={{
+          title: 'MainScreen',
+          tabBarIcon: ({focused }) => (
+            <TabBarIcon name={focused ? 'map' : 'map-outline'} color={'#52A0DE'} />
+          ),
+          tabBarLabel: () => null,
+        }}
+      />
+      <Tabs.Screen
         name="notification"
         options={{
           title: 'Notifications',

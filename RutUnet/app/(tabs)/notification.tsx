@@ -5,7 +5,7 @@ import { NotificationDisplay } from '@/components/Components/Notification';
 
 
 
-export default function UserInfo() {
+export default function UserNotification() {
   const router = useRouter();
 
   let notificationText = [["La ruta pasa en 5 min!","7:20 am - xx/xx/202x"], ["La ruta empezó el recorrido","7:00 am - xx/xx/202x"], ["La ruta esta por salir!","1:15 pm - xx/xx/202x"], ["La ruta pasa en 5 min!","7:20 am - xx/xx/202x"]]
