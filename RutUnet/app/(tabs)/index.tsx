@@ -1,59 +1,34 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Image, StyleSheet, View, Button, Text, StatusBar, Pressable } from 'react-native';
 import { useRouter } from 'expo-router';
 import MapView from 'react-native-maps';
+import { Session } from '@supabase/supabase-js';
+import { supabase } from '@/lib/supabase';
+import { AuthScreen, HomeMap } from '@/components/Components/HomeScreen';
+import Account from '@/components/Components/Account';
 
 
-export default function UserInfo() {
+export default function HomeScreen() {
+  const [session, setSession] = useState<Session | null>(null)
+
+  useEffect(() => {
+    supabase.auth.getSession().then(({ data: { session } }) => {
+      setSession(session)
+    })
+
+    supabase.auth.onAuthStateChange((_event, session) => {
+      setSession(session)
+    })
+  }, [])
   const router = useRouter();
 
   
   return (
-    
-    <View style={styles.container_bg}>
-      <View style={styles.header_container}>
-        <Text style={styles.ruta_name}>Ruta: 19 de abril</Text>
-
-        <View style={styles.ruta_informationContainer}>
-          <Text style={[styles.ruta_text, styles.ruta_informationDisplayUpperText]}>Tu Parada</Text>
-          <View style={styles.ruta_informationDisplay}>
-              <Image 
-                source={require("../../assets/icons/gps_pin.png")}
-                style={styles.infoImage}
-              />
-              <Text style={ styles.ruta_informationDisplayText}>La Normal</Text>
-            </View>
-        </View>
-        
-        <View style={styles.ruta_informationContainerBig}>
-          <View style={styles.ruta_informationDisplay}>
-              <Image 
-                source={require("../../assets/icons/busFull.png")}
-                style={styles.infoImage}
-              />
-              <Text style={ styles.ruta_informationDisplayText}>Tiempo para llegar: 7 min</Text>
-            </View>
-            <View style={styles.ruta_separator}/>
-            <View style={styles.ruta_informationDisplay}>
-              <Image 
-                source={require("../../assets/icons/gps_pinRed.png")}
-                style={styles.infoImage}
-              />
-              <Text style={ styles.ruta_informationDisplayText}>Proxima parada: C.C el Este</Text>
-            </View>
-        </View>
-   
-      </View>
-       <MapView style={styles.map} 
-
-       initialRegion={{
-        latitude: 7.7638637,
-        longitude: -72.2113146,
-        latitudeDelta: 0.005,
-        longitudeDelta: 0.009,
-      }}
-       />
+    <View style={{flex: 1}}>
+      {session && session.user ? <HomeMap /> : <AuthScreen />}
+      {/* {session && session.user ? <Account key={session.user.id} session={session} />  : <AuthScreen />} */}
     </View>
+    
   );
 }
 
