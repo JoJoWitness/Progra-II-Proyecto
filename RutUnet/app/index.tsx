@@ -1,21 +1,26 @@
 import React from 'react';
 import { Image, StyleSheet, View, Button, Text, StatusBar, Pressable } from 'react-native';
 import { useRouter } from 'expo-router';
+import Auth from '@/components/Components/Auth';
 
 export default function HomeScreen() {
   const router = useRouter();
   return (
     
     <View style={styles.container}>
-      <StatusBar hidden={true} />
-      <View style={styles.logoContainer}>
-        <Image
-          source={require('../assets/images/RutUNET.png')} // Adjust the path to your logo
-          style={styles.logo}
-        />
+      <View>
+        <StatusBar hidden={true} />
+        <View style={styles.logoContainer}>
+          <Image
+            source={require('../assets/images/RutUNET.png')} // Adjust the path to your logo
+            style={styles.logo}
+          />
+        </View>
+        <Text style={styles.title}>RUTUNET</Text>
       </View>
-      <Text style={styles.title}>RUTUNET</Text>
-      <View style={styles.buttonContainer}>
+      
+      <Auth/>
+      {/* <View style={styles.buttonContainer}>  
         <Pressable style={styles.buttonLog} onPress={() => router.push('./(tabs)/mainScreen')}>
             <Text style={styles.buttonTextLog}>Ingresar</Text>
           </Pressable>
@@ -24,7 +29,7 @@ export default function HomeScreen() {
               <Text>Registrarse</Text>
             </Text>
           </Pressable>
-      </View>
+      </View> */}
     </View>
   );
 }
@@ -35,9 +40,11 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     padding: 16,
-    backgroundColor: '#52a0de', // Change the background color
+    backgroundColor: '#52a0de', 
+    gap: 20
   },
   logoContainer: {
+    marginTop: 20,
     width: 145,
     height: 220,
   },
