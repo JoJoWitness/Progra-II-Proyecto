@@ -1,7 +1,7 @@
 {
   "expo": {
     "name": "RutUnet",
-    "slug": "RutUnet",
+    "slug": "rutunet",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
@@ -19,7 +19,9 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/images/adaptive-icon.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "package": "com.rutasunet.rutunet",
+      "googleServicesFile": "./google-services.json"
     },
     "web": {
       "bundler": "metro",
@@ -31,6 +33,15 @@
     ],
     "experiments": {
       "typedRoutes": true
-    }
+    },
+    "extra": {
+      "router": {
+        "origin": false
+      },
+      "eas": {
+        "projectId": "60f16625-90e6-4500-b48e-8b07a5250798"
+      }
+    },
+    "owner": "rutasunet"
   }
 }

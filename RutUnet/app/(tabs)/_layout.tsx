@@ -39,16 +39,21 @@ export default function TabLayout() {
           tabBarLabel: () => null,
         }}
       />
-        <Tabs.Screen
+        {/* <Tabs.Screen
         name="stats"
         options={{
+          tabBarStyle: {
+            display: 'none'
+          },
           title: 'Stats',
+          
           tabBarIcon: ({focused }) => (
             <TabBarIcon name={focused ? 'stats-chart' : 'stats-chart-outline'} color={'#52A0DE'} />
           ),
           tabBarLabel: () => null,
+          
         }}
-      />
+      /> */}
       
       <Tabs.Screen
         name="notification"
@@ -64,6 +69,17 @@ export default function TabLayout() {
         name="user"
         options={{
           title: 'User',
+          tabBarIcon: ({focused }) => (
+            <TabBarIcon name={focused ? 'settings' : 'settings-outline'} color={'#52A0DE'} />
+          ),
+          tabBarLabel: () => null,
+        }}
+      />
+       <Tabs.Screen
+        name="userdata"
+        options={{
+          title: 'User',
+          href: null,
           tabBarIcon: ({focused }) => (
             <TabBarIcon name={focused ? 'settings' : 'settings-outline'} color={'#52A0DE'} />
           ),

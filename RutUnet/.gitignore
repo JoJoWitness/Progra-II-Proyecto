@@ -9,6 +9,10 @@ npm-debug.*
 *.mobileprovision
 *.orig.*
 web-build/
+.env
+google-services.json
+@rutasunet_rutunet.jks
+android/
 
 # macOS
 .DS_Store
