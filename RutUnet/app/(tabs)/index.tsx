@@ -4,7 +4,7 @@ import { useRouter } from 'expo-router';
 import MapView from 'react-native-maps';
 import { Session } from '@supabase/supabase-js';
 import { supabase } from '@/lib/supabase';
-import { AuthScreen, HomeMap } from '@/components/Components/HomeScreen';
+import { AuthScreen, HomeMap, HomeMapCoordinator } from '@/components/Components/HomeScreen';
 import Account from '@/components/Components/Account';
 
 
@@ -25,7 +25,7 @@ export default function HomeScreen() {
   
   return (
     <View style={{flex: 1}}>
-      {session && session.user ? <HomeMap /> : <AuthScreen />}
+      {session && session.user ? <HomeMapCoordinator /> : <AuthScreen />}
       {/* {session && session.user ? <Account key={session.user.id} session={session} />  : <AuthScreen />} */}
     </View>
     

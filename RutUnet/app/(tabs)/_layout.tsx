@@ -28,6 +28,16 @@ export default function TabLayout() {
         headerShown: false,
         tabBarStyle: session && session.user ? {backgroundColor: '#EDF3FC'} : { display: 'none' },
       }}>
+         <Tabs.Screen
+        name="notification"
+        options={{
+          title: 'Notifications',
+          tabBarIcon: ({focused }) => (
+            <TabBarIcon name={focused ? 'notifications' : 'notifications-outline'} color={'#52A0DE'} />
+          ),
+          tabBarLabel: () => null,
+        }}
+      />
         <Tabs.Screen
         name="index"
         options={{
@@ -55,24 +65,20 @@ export default function TabLayout() {
         }}
       /> */}
       
+     
       <Tabs.Screen
-        name="notification"
-        options={{
-          title: 'Notifications',
-          tabBarIcon: ({focused }) => (
-            <TabBarIcon name={focused ? 'notifications' : 'notifications-outline'} color={'#52A0DE'} />
-          ),
-          tabBarLabel: () => null,
-        }}
-      />
-      <Tabs.Screen
-        name="user"
+        name="[user]"
         options={{
           title: 'User',
+          href: { 
+            //@ts-ignore
+            pathname: '/[user]' 
+          },
           tabBarIcon: ({focused }) => (
             <TabBarIcon name={focused ? 'settings' : 'settings-outline'} color={'#52A0DE'} />
           ),
           tabBarLabel: () => null,
+          
         }}
       />
        <Tabs.Screen

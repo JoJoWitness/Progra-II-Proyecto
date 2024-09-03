@@ -3,6 +3,7 @@ import { Image, StyleSheet, View, PermissionsAndroid, Platform, Button, Text, St
 import { useRouter } from 'expo-router';
 import Auth from '@/components/Components/Auth';
 import MapView , {Marker}from 'react-native-maps';
+import { supabase } from '@/lib/supabase';
 import * as Location from 'expo-location';
 
 export function AuthScreen() {
@@ -107,6 +108,109 @@ export  function HomeMap() {
             </View>
         </View>
    
+      </View>
+      <Pressable style={styles.locationButton}  onPress={requestLocationPermission}>
+        <Image 
+          source={require("../../assets/icons/my_location.png")}
+          style={styles.infoImage}
+        />
+      </Pressable>
+       <MapView 
+        style={styles.map} 
+        region={region}
+        onRegionChangeComplete={(region) => setRegion(region)}
+       />
+        
+       
+    </View>
+  );
+}
+
+export  function HomeMapCoordinator() {
+  
+  const [locations, setLocations] = useState<{ stop_name: string, location_long: number,location_lat: number }[]>([]);
+  const requestBusTable = async () => {
+    const { data, error } = await supabase.from('bus_stops').select(`
+      stop_name, 
+      location_long, 
+      location_lat
+    `);
+ 
+    if (error) {
+      console.error('Error fetching location data:', error);
+    } else if (data) {
+      setLocations(data);
+    }
+    console.log(locations[14].stop_name)
+  }
+    
+
+  
+
+ 
+  
+
+  
+   
+
+  const [region, setRegion] = useState({
+    latitude: 7.7638637,
+    longitude: -72.2113146,
+    latitudeDelta: 0.005,
+    longitudeDelta: 0.009,
+  });
+
+  
+  const requestLocationPermission = async () => {
+    let { status } = await Location.requestForegroundPermissionsAsync();
+    if (status !== 'granted') {
+      console.log('Permission to access location was denied');
+      return;
+    }
+
+    let location = await Location.getCurrentPositionAsync({});
+    const { latitude, longitude } = location.coords;
+    setRegion({
+      ...region,
+      latitude,
+      longitude,
+    });
+  };
+
+  useEffect(() => {
+    requestLocationPermission();
+  }, []);
+    
+
+
+  
+  return (
+    
+    <View style={styles.container_bg}>
+      <View style={styles.header_container}>
+        <Text style={styles.ruta_name}>Ruta: 19 de abril</Text>
+        <View style={styles.ruta_informationContainerBig}>
+          <View style={styles.ruta_informationDisplay}>
+              <Image 
+                source={require("../../assets/icons/busFull.png")}
+                style={styles.infoImage}
+              />
+              <Text style={ styles.ruta_informationDisplayText}>Tiempo para llegar: 7 min</Text>
+            </View>
+            <View style={styles.ruta_separator}/>
+            <View style={styles.ruta_informationDisplay}>
+              <Image 
+                source={require("../../assets/icons/gps_pinRed.png")}
+                style={styles.infoImage}
+              />
+              <Text style={ styles.ruta_informationDisplayText}>Proxima parada: C.C el Este</Text>
+            </View>
+        </View>
+   
+        <Pressable style={styles.ruta_transmitButton}  onPress={requestBusTable}>
+          <Text style={styles.ruta_transmitText}>Transmitir</Text>
+        </Pressable>
+
       </View>
       <Pressable style={styles.locationButton}  onPress={requestLocationPermission}>
         <Image 
@@ -299,6 +403,20 @@ const styles = StyleSheet.create({
     width: 40,
     backgroundColor: '#52a0de'
 
+  },
+  ruta_transmitButton:{
+    width: '80%',
+    backgroundColor: '#EDF3FC',
+    padding: 10,
+    borderRadius: 30,
+    alignItems: 'center',
+  },
+  
+  ruta_transmitText:{
+    color: '#52A0DE', // Change the text color for Log In button
+    fontSize: 16,
+    fontWeight: 'bold',
+     fontFamily: 'Poppins' 
   }
 
 });
