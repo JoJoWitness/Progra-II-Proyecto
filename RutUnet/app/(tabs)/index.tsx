@@ -20,16 +20,23 @@ export default function HomeScreen() {
       setSession(session)
     })
   }, [])
-  const router = useRouter();
 
-  
-  return (
-    <View style={{flex: 1}}>
-      {session && session.user ? <HomeMapCoordinator /> : <AuthScreen />}
-      {/* {session && session.user ? <Account key={session.user.id} session={session} />  : <AuthScreen />} */}
-    </View>
-    
-  );
+  if(session && session.user ){
+    return(
+      <View style={{flex: 1}}>
+        {(session.user.email == "jordano.pernia@unet.edu.ve") ?  <HomeMapCoordinator /> :  <HomeMap/>} 
+      </View>
+    )
+  }
+  else{
+    return (
+      <View style={{flex: 1}}>
+         <AuthScreen />
+      </View>
+    )
+  }
+ 
+
 }
 
 const styles = StyleSheet.create({
