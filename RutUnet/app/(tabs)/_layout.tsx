@@ -6,6 +6,7 @@ import { Colors } from '@/constants/Colors';
 import { useColorScheme } from '@/hooks/useColorScheme';
 import { Session } from '@supabase/supabase-js';
 import { supabase } from '@/lib/supabase';
+import { NavigationContainer } from '@react-navigation/native';
 
 export default function TabLayout() {
  
@@ -23,24 +24,13 @@ export default function TabLayout() {
   
 
   return (
+    
     <Tabs
       screenOptions={{
         headerShown: false,
         tabBarStyle: session && session.user ? {backgroundColor: '#EDF3FC'} : { display: 'none' },
       }}>
-         {/* <Tabs.Screen
-        name="notification"
-        options={{
-          title: 'Notifications',
-          tabBarStyle: {
-            display: 'none'
-          },
-          tabBarIcon: ({focused }) => (
-            <TabBarIcon name={focused ? 'notifications' : 'notifications-outline'} color={'#52A0DE'} />
-          ),
-          tabBarLabel: () => null,
-        }}
-      /> */}
+      
 
       <Tabs.Screen
         name="stats"
@@ -66,15 +56,12 @@ export default function TabLayout() {
           tabBarLabel: () => null,
         }}
       />
-     
+
       <Tabs.Screen
-        name="[user]"
+        name="user"
         options={{
           title: 'User',
-          href: { 
-            //@ts-ignore
-            pathname: '/[user]' 
-          },
+          
           tabBarIcon: ({focused }) => (
             <TabBarIcon name={focused ? 'settings' : 'settings-outline'} color={'#52A0DE'} />
           ),
@@ -82,17 +69,7 @@ export default function TabLayout() {
           
         }}
       />
-       <Tabs.Screen
-        name="userdata"
-        options={{
-          title: 'User',
-          href: null,
-          tabBarIcon: ({focused }) => (
-            <TabBarIcon name={focused ? 'settings' : 'settings-outline'} color={'#52A0DE'} />
-          ),
-          tabBarLabel: () => null,
-        }}
-      />
+ 
 
     <Tabs.Screen
         name="editDays"
@@ -111,5 +88,6 @@ export default function TabLayout() {
 
 
     </Tabs>
+
   );
 }

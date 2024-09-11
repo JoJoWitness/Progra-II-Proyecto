@@ -1,24 +1,28 @@
 
+import { Link } from 'expo-router';
+import { useState } from 'react';
 import { View, Text, Image, StyleSheet, Pressable, ImageSourcePropType} from 'react-native';
 
 type UserDisplayProps = {
   icon: ImageSourcePropType;
   displayName: string;
   displayText: string;
-  editInfo: () => void;
+  stateProp: boolean;
+  setStateProp: (boolean: boolean) => void;
 
 };
 
 type UserDisplayPropsWeeks = {
   displayName: string;
   displayText: string[];
-  dayBool: boolean[];
-  editInfo: () => void;
+  dayBool: boolean[]
+  stateProp: boolean;
+  setStateProp: (boolean: boolean) => void;
 
 };
 
 
-export const UserDisplay: React.FC<UserDisplayProps> = ({icon, displayName, displayText, editInfo }) => {
+export const UserDisplay: React.FC<UserDisplayProps> = ({icon, displayName, displayText, stateProp, setStateProp}) => {
   return (
    
       <View style={styles.user_informationContainer}>
@@ -31,7 +35,7 @@ export const UserDisplay: React.FC<UserDisplayProps> = ({icon, displayName, disp
             />
             <Text style={[styles.user_Text, styles.user_informationDisplayText]}>{displayText}</Text>
           </View>
-          <Pressable  onPress={() => editInfo }>
+          <Pressable onPress={() => setStateProp(!stateProp)}>
             <Image 
               source={require('../../assets/icons/edit.png')}
               style={styles.infoImage}
@@ -43,7 +47,7 @@ export const UserDisplay: React.FC<UserDisplayProps> = ({icon, displayName, disp
   );
 };
 
-export const UserDisplayWeek: React.FC<UserDisplayPropsWeeks> = ({ displayName, displayText, editInfo, dayBool }) => {
+export const UserDisplayWeek: React.FC<UserDisplayPropsWeeks> = ({ displayName, displayText, dayBool, stateProp, setStateProp}) => {
 
 
   return (
@@ -66,7 +70,7 @@ export const UserDisplayWeek: React.FC<UserDisplayPropsWeeks> = ({ displayName, 
             ))}
 
           </View>
-          <Pressable style={{position: "absolute", right: 16}}  onPress={() => editInfo }>
+          <Pressable style={{position: "absolute", right: 16}}  onPress={() => setStateProp(!stateProp)}>
             <Image 
               source={require('../../assets/icons/edit.png')}
               style={styles.infoImage}
