@@ -325,7 +325,7 @@ function StopSelectionScreen({stateProp, setStateProp, userId}){
         }
     }, [busId]);
 
-    const saveSopSelection = async () => {
+    const saveStopSelection = async () => {
         if (selected) {
              
             console.log(selected);
@@ -352,7 +352,9 @@ function StopSelectionScreen({stateProp, setStateProp, userId}){
                 data={busStops}
                 defaultOption={{ key: '', value: 'Seleccione una parada' }} 
             />
-             <Button title="Guardar" onPress={saveSopSelection} />
+             <Pressable style={styles.edit_button} onPress={saveStopSelection} >
+                <Text style={{textAlign: "center", color: "#65A9E2", fontWeight: 500}}>Guardar</Text>
+            </Pressable>
         </View>
     );
 };
@@ -405,7 +407,9 @@ function TimeSelectionScreen({stateProp, setStateProp, userId}){
                 data={data}
                 defaultOption={{ key: '', value: 'Seleccione tiempo de espera' }} 
             />
-            <Button title="Guardar" onPress={saveSelection} />
+           <Pressable style={styles.edit_button} onPress={saveSelection} >
+                <Text style={{textAlign: "center", color: "#65A9E2", fontWeight: 500}}>Guardar</Text>
+            </Pressable>
         </View>
     );
 };
@@ -493,7 +497,9 @@ function DaysSelectionScreen({stateProp, setStateProp, userId}){
                 notFoundText='No hay resultados'
                 onSelect={()=>console.log(selected)}//////
             />
-            <Button  title="Guardar Selección" onPress={saveDaysSelection} />
+            <Pressable style={styles.edit_button} onPress={saveDaysSelection} >
+                <Text style={{textAlign: "center", color: "#65A9E2", fontWeight: 500}}>Guardar</Text>
+            </Pressable>
         </View>
     );
 };
